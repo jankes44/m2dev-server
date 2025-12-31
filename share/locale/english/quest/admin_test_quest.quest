@@ -1,0 +1,166 @@
+quest admin_test_quest begin
+    state start begin
+        when login begin
+            set_state(quest_active)
+        end
+    end
+    
+    state quest_active begin
+        when letter begin
+            send_letter("Admin Quest")
+        end
+        
+        when button or info begin
+            q.start()
+            
+            local continue = true
+            while continue do
+                say_title("Admin Test")
+                say("")
+                
+                local main_menu = select("Levels", "Yang", "Items", "Cancel")
+                
+                if main_menu == 1 then
+                    say_title("Admin Test - Levels")
+                    say("")
+                    local level_choice = select("Get 1 level", "Get 5 levels", "Get 10 levels", "Back")
+                    
+                    if level_choice == 1 then
+                        pc.give_exp2(pc.get_next_exp())
+                        say_title("Admin Test")
+                        say("You received 1 level!")
+                        say("")
+                        say("Relog to trigger level quests.")
+                        continue = true
+                    elseif level_choice == 2 then
+                        for i = 1, 5 do
+                            pc.give_exp2(pc.get_next_exp())
+                        end
+                        say_title("Admin Test")
+                        say("You received 5 levels!")
+                        say("")
+                        say("Relog to trigger level quests.")
+                        continue = true
+                    elseif level_choice == 3 then
+                        for i = 1, 10 do
+                            pc.give_exp2(pc.get_next_exp())
+                        end
+                        say_title("Admin Test")
+                        say("You received 10 levels!")
+                        say("")
+                        say("Relog to trigger level quests.")
+                        continue = true
+                    end
+                    
+                elseif main_menu == 2 then
+                    say_title("Admin Test - Yang")
+                    say("")
+                    local yang_choice = select("Get 1M Yang", "Get 10M Yang", "Back")
+                    
+                    if yang_choice == 1 then
+                        pc.change_money(1000000)
+                        say_title("Admin Test")
+                        say("You received 1,000,000 Yang!")
+                        continue = true
+                    elseif yang_choice == 2 then
+                        pc.change_money(10000000)
+                        say_title("Admin Test")
+                        say("You received 10,000,000 Yang!")
+                        continue = true
+                    end
+                    
+                elseif main_menu == 3 then
+                    say_title("Admin Test - Items")
+                    say("")
+                    local item_choice = select("Sword+9", "Purple Potion(L)", "Green Potion(L)", "Enchant Item", "Reinforce Item", "More...")
+                    
+                    if item_choice == 1 then
+                        pc.give_item2(19, 1)
+                        say_title("Admin Test")
+                        say("You received Sword+9!")
+                        continue = true
+                    elseif item_choice == 2 then
+                        pc.give_item2(27105, 1)
+                        say_title("Admin Test")
+                        say("You received Purple Potion(L)!")
+                        continue = true
+                    elseif item_choice == 3 then
+                        pc.give_item2(27112, 1)
+                        say_title("Admin Test")
+                        say("You received Green Potion(L)!")
+                        continue = true
+                    elseif item_choice == 4 then
+                        pc.give_item2(71084, 1)
+                        say_title("Admin Test")
+                        say("You received Enchant Item!")
+                        continue = true
+                    elseif item_choice == 5 then
+                        pc.give_item2(71085, 1)
+                        say_title("Admin Test")
+                        say("You received Reinforce Item!")
+                        continue = true
+                    elseif item_choice == 6 then
+                        say_title("Admin Test - Items (2)")
+                        say("")
+                        local item_choice2 = select("White Lion", "Dragon God Attack", "Dragon God Defence", "Dragon God Life", "Dragon God Intelligence", "More...")
+                        
+                        if item_choice2 == 1 then
+                            pc.give_item2(71124, 1)
+                            say_title("Admin Test")
+                            say("You received White Lion!")
+                            continue = true
+                        elseif item_choice2 == 2 then
+                            pc.give_item2(72033, 1)
+                            say_title("Admin Test")
+                            say("You received Dragon God Attack!")
+                            continue = true
+                        elseif item_choice2 == 3 then
+                            pc.give_item2(72036, 1)
+                            say_title("Admin Test")
+                            say("You received Dragon God Defence!")
+                            continue = true
+                        elseif item_choice2 == 4 then
+                            pc.give_item2(72037, 1)
+                            say_title("Admin Test")
+                            say("You received Dragon God Life!")
+                            continue = true
+                        elseif item_choice2 == 5 then
+                            pc.give_item2(72040, 1)
+                            say_title("Admin Test")
+                            say("You received Dragon God Intelligence!")
+                            continue = true
+                        elseif item_choice2 == 6 then
+                            say_title("Admin Test - Items (3)")
+                            say("")
+                            local item_choice3 = select("Wind Shoes+", "Bravery Cape", "Blessing Marble", "Gold Bar (2M Yang)", "Back")
+                            
+                            if item_choice3 == 1 then
+                                pc.give_item2(72702, 1)
+                                say_title("Admin Test")
+                                say("You received Wind Shoes+!")
+                                continue = true
+                            elseif item_choice3 == 2 then
+                                pc.give_item2(76007, 1)
+                                say_title("Admin Test")
+                                say("You received Bravery Cape!")
+                                continue = true
+                            elseif item_choice3 == 3 then
+                                pc.give_item2(76015, 1)
+                                say_title("Admin Test")
+                                say("You received Blessing Marble!")
+                                continue = true
+                            elseif item_choice3 == 4 then
+                                pc.give_item2(80007, 1)
+                                say_title("Admin Test")
+                                say("You received Gold Bar (2M Yang)!")
+                                continue = true
+                            end
+                        end
+                    end
+                else
+                    continue = false
+                end
+            end
+        end
+    end
+end
