@@ -18,7 +18,7 @@ quest admin_test_quest begin
                 say_title("Admin Test")
                 say("")
                 
-                local main_menu = select("Levels", "Yang", "Items", "Cancel")
+                local main_menu = select("Levels", "Yang", "Items", "Teleport", "Cancel")
                 
                 if main_menu == 1 then
                     say_title("Admin Test - Levels")
@@ -154,6 +154,79 @@ quest admin_test_quest begin
                                 say_title("Admin Test")
                                 say("You received Gold Bar (2M Yang)!")
                                 continue = true
+                            end
+                        end
+                    end
+                    
+                elseif main_menu == 4 then
+                    say_title("Admin Test - Teleport")
+                    say("")
+                    say("Select Empire:")
+                    say("")
+                    local empire_choice = select("Shinsoo M1", "Shinsoo M2", "Chunjo M1", "Chunjo M2", "Jinno M1", "Jinno M2", "More...")
+                    
+                    if empire_choice == 1 then
+                        -- Shinsoo M1 (map_a1 = index 1) - Base: 409600,896000 + Town: 597,682 * 100
+                        pc.warp(469300, 964200, 1)
+                        continue = false
+                    elseif empire_choice == 2 then
+                        -- Shinsoo M2 (map_a3 = index 3) - Base: 307200,819200 + Town: 459,637 * 100
+                        pc.warp(353100, 882900, 3)
+                        continue = false
+                    elseif empire_choice == 3 then
+                        -- Chunjo M1 (map_b1 = index 21) - Base: 0,102400 + Town: 557,555 * 100
+                        pc.warp(55700, 157900, 21)
+                        continue = false
+                    elseif empire_choice == 4 then
+                        -- Chunjo M2 (map_b3 = index 23) - Base: 102400,204800 + Town: 431,352 * 100
+                        pc.warp(145500, 240000, 23)
+                        continue = false
+                    elseif empire_choice == 5 then
+                        -- Jinno M1 (map_c1 = index 41) - Base: 921600,204800 + Town: 480,736 * 100
+                        pc.warp(969600, 278400, 41)
+                        continue = false
+                    elseif empire_choice == 6 then
+                        -- Jinno M2 (map_c3 = index 43) - Base: 819200,204800 + Town: 447,412 * 100
+                        pc.warp(863900, 246000, 43)
+                        continue = false
+                    elseif empire_choice == 7 then
+                        -- Dungeons
+                        say_title("Admin Test - Dungeons")
+                        say("")
+                        local dungeon_choice = select("Desert", "Yongbi Desert", "Mount Sohan", "Grotto", "Flame Dungeon", "More...")
+                        
+                        if dungeon_choice == 1 then
+                            pc.warp(218000, 168000)
+                            continue = false
+                        elseif dungeon_choice == 2 then
+                            pc.warp(346700, 632900)
+                            continue = false
+                        elseif dungeon_choice == 3 then
+                            pc.warp(499300, 298400)
+                            continue = false
+                        elseif dungeon_choice == 4 then
+                            pc.warp(416000, 172800)
+                            continue = false
+                        elseif dungeon_choice == 5 then
+                            pc.warp(590500, 110500)
+                            continue = false
+                        elseif dungeon_choice == 6 then
+                            say_title("Admin Test - Dungeons (2)")
+                            say("")
+                            local dungeon_choice2 = select("Thunder Mountains", "Cape Dragon Head", "Nephrite Bay", "Spider Dungeon", "Back")
+                            
+                            if dungeon_choice2 == 1 then
+                                pc.warp(843200, 76800)
+                                continue = false
+                            elseif dungeon_choice2 == 2 then
+                                pc.warp(126100, 19800)
+                                continue = false
+                            elseif dungeon_choice2 == 3 then
+                                pc.warp(429300, 93900)
+                                continue = false
+                            elseif dungeon_choice2 == 4 then
+                                pc.warp(59700, 86100)
+                                continue = false
                             end
                         end
                     end

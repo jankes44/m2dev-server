@@ -33,6 +33,8 @@ advance GOD
 ma GOD
 mm GOD
 mc GOD
+eventflag GOD
+geteventflag GOD
 shutdown IMPLEMENTOR
 private IMPLEMENTOR
 use_item IMPLEMENTOR
