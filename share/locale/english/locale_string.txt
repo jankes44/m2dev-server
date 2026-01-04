@@ -2295,3 +2295,12 @@
 
 "[Friends] %s has already sent you a friend request.";
 "[Friends] %s has already sent you a friend request.";
+
+"You cannot delete an item while trading.";
+"You cannot delete an item while trading.";
+
+"You cannot delete an item that is currently in use.";
+"You cannot delete an item that is currently in use.";
+
+"Item has been destroyed.";
+"Item has been destroyed.";
