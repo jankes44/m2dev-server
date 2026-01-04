@@ -3040,6 +3040,8 @@ VNUM	LOCALE_NAME
 27119	Sky Blue Potion(S)
 27120	Sky Blue Potion(M)
 27121	Sky Blue Potion(L)
+27200	Red Potion (Infinite)
+27201	Blue Potion (Infinite)
 27400	Fishing Pole+1
 27410	Fishing Pole+2
 27420	Fishing Pole+3
