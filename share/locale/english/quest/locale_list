@@ -176,6 +176,7 @@ questscroll4.quest
 questscroll5.quest
 reset_scroll.quest
 reset_status.quest
+skill_group.quest
 skill_reset2.quest
 spider_dungeon_2floor.quest
 spider_dungeon_3floor_boss.quest
@@ -238,4 +239,3 @@ dragon_soul_daily_gift.quest
 event_flame_dungeon_open.quest
 item_delete.quest
 change_name.quest
-skill_group_custom.quest
