@@ -1,0 +1,59 @@
+quest teleport begin
+	state start begin	
+		when login begin
+			cmdchat("Teleport index"..q.getcurrentquestindex())
+		end
+		
+		when info or button begin
+			cmdchat("Teleport GetInfo")
+			local i = tonumber(input())
+			
+			if type(i) ~= "number" then 
+				return 
+			end
+			
+			local warp = teleport.warp_kords()
+			if warp[i+1] == nil then 
+				return 
+			end
+			
+			pc.warp(warp[i+1][1], warp[i+1][2])
+		end
+			
+		function warp_kords()
+			return 	{
+						{590500, 110800},	--0: Demon Tower
+						{402100, 673900},	--1: Hwang Temple
+						{10, 10},			--2: Thunder Valley
+						{10, 10},			--3: Red Forest
+						{10, 10},			--4: Cape Dragon Fire
+						{775200, 448200},	--5: Monkey Dungeon
+						{10, 10},			--6: Lungsam
+						{10, 10},			--7: Neowiz World
+						{491800, 173600},	--8: Mount Sohan
+						{863900, 246000},	--9: Bakra
+						{321300, 808000},	--10: Orc Valley
+						{592000, 100500},	--11: Devil's Catacomb
+						{145500, 240000},	--12: Bokjung
+						{10, 10},			--13: Monkey Dungeon 2
+						{55700, 157900},	--14: Chunjo Map 1
+						{10, 10},			--15: Nephrite Bay
+						{10, 10},			--16: Grotto 1
+						{10, 10},			--17: Grotto 2
+						{10, 10},			--18: Grotto Boss
+						{703800, 462500},	--19: Spider Dungeon 2
+						{95900, 571000},	--20: Spider Dungeon 3
+						{10, 10},			--21: Spider Dungeon Boss
+						{353100, 882900},	--22: Yayang
+						{469300, 964200},	--23: Shinsoo Map 1
+						{10, 10},			--24: Monkey Dungeon 3
+						{221900, 502700},	--25: Yongbi Desert
+						{10, 10},			--26: Snake Field
+						{969600, 278400},	--27: Jinno Map 1
+						{730700, 689800},	--28: Fire Land
+						{10, 10},			--29: Gautama Cliff
+						{10, 10},			--30: Spider Dungeon 1
+					}
+		end
+	end
+end
