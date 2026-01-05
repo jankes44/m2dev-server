@@ -191,42 +191,47 @@ quest admin_test_quest begin
                         continue = false
                     elseif empire_choice == 7 then
                         -- Dungeons
-                        say_title("Admin Test - Dungeons")
+                        say_title("Admin Test - Teleport")
                         say("")
-                        local dungeon_choice = select("Desert", "Yongbi Desert", "Mount Sohan", "Grotto", "Flame Dungeon", "More...")
+                        local dungeon_choice = select("Yongbi Desert", "Mount Sohan", "Fireland", "Orc Valley (Seungryong)", "More...")
                         
                         if dungeon_choice == 1 then
-                            pc.warp(218000, 168000)
+                            pc.warp(221900, 502700)
                             continue = false
                         elseif dungeon_choice == 2 then
-                            pc.warp(346700, 632900)
+                            pc.warp(491800, 173600)
                             continue = false
                         elseif dungeon_choice == 3 then
-                            pc.warp(499300, 298400)
+                            pc.warp(730700, 689800)
                             continue = false
                         elseif dungeon_choice == 4 then
-                            pc.warp(416000, 172800)
+                            pc.warp(321300, 808000)
                             continue = false
                         elseif dungeon_choice == 5 then
-                            pc.warp(590500, 110500)
-                            continue = false
-                        elseif dungeon_choice == 6 then
-                            say_title("Admin Test - Dungeons (2)")
+                            say_title("Admin Test - Teleport")
                             say("")
-                            local dungeon_choice2 = select("Thunder Mountains", "Cape Dragon Head", "Nephrite Bay", "Spider Dungeon", "Back")
+                            local dungeon_choice2 = select("Spider Dungeon (1)", "Spider Dungeon (2)", "Spider Dungeon (3)", "Demon Tower", "More...")
                             
                             if dungeon_choice2 == 1 then
-                                pc.warp(843200, 76800)
+                                pc.warp(60000, 497000)
                                 continue = false
                             elseif dungeon_choice2 == 2 then
-                                pc.warp(126100, 19800)
+                                pc.warp(703800, 462500)
                                 continue = false
                             elseif dungeon_choice2 == 3 then
-                                pc.warp(429300, 93900)
+                                pc.warp(95900, 571000)
                                 continue = false
                             elseif dungeon_choice2 == 4 then
-                                pc.warp(59700, 86100)
+                                pc.warp(590500, 110800)
                                 continue = false
+                            elseif dungeon_choice == 5 then
+                                say_title("Admin Test - Teleport")
+                                say("")
+                                local dungeon_choice3 = select("Devil's Catacomb", "Back")
+                                if dungeon_choice3 == 1 then
+                                    pc.warp(592000, 100500)
+                                    continue = false
+                                end
                             end
                         end
                     end
