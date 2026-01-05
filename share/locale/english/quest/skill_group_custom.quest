@@ -1,0 +1,75 @@
+quest skill_group begin
+    state start begin
+        when login or levelup with pc.level>=5 and pc.skillgroup ==0 begin
+            set_state(get_skill)
+        end
+    end
+
+    state get_skill begin
+        function give_skill_group(n)
+            pc.set_skill_group(n)
+            pc.clear_skill()
+            char_log(0, "CLEAR_SKILL", "Skill cleared after selection")
+            say(gameforge.skill_group._320_say)
+            if not pc.is_clear_skill_group() then
+                say(gameforge.skill_group._330_say)
+                say_title(gameforge.buy_fishrod._210_sayTitle)
+                say_reward(gameforge.skill_group._340_sayReward)
+            else
+                say_reward(gameforge.skill_group._350_sayReward)
+            end
+            clear_letter()
+        end
+
+        when login with pc.get_skill_group()!=0 begin
+            restart_quest()
+        end
+
+        when letter begin
+            send_letter("Choose your skill group.")
+        end
+
+        when button or info begin
+            say_title("Skill group:")
+            local job=pc.get_job()
+
+            if job == 0 then
+                local war_skill = select("Body","Mental")
+                if war_skill == 1 then
+                    say_title(gameforge.skill_group._310_sayTitle)
+                    skill_group.give_skill_group(1)
+                else
+                    say_title(gameforge.skill_group._420_sayTitle)
+                    skill_group.give_skill_group(2)
+                end
+            elseif job == 1 then
+                local ninja_skill = select("Dagger","Archer")
+                if ninja_skill == 1 then
+                    say_title(gameforge.skill_group._480_sayTitle)
+                    skill_group.give_skill_group(1)
+                else
+                    say_title(gameforge.skill_group._540_sayTitle)
+                    skill_group.give_skill_group(2)
+                end
+            elseif job == 2 then
+                local sura_skill = select("Black magic","Weapon")
+                if sura_skill == 1 then
+                    say_title(gameforge.skill_group._600_sayTitle)
+                    skill_group.give_skill_group(1)
+                else
+                    say_title(gameforge.skill_group._650_sayTitle)
+                    skill_group.give_skill_group(2)
+                end
+            elseif job == 3 then
+                local shaman_skill = select("Dragon Force", "Healing Force")
+                if shaman_skill == 1 then
+                    say_title(gameforge.skill_group._710_sayTitle)
+                    skill_group.give_skill_group(1)
+                else
+                    say_title(gameforge.skill_group._760_sayTitle)
+                    skill_group.give_skill_group(2)
+                end
+            end
+        end
+    end
+end
