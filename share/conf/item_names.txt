@@ -5564,6 +5564,8 @@ VNUM	LOCALE_NAME
 76022	Sun Elixir (M)
 76023	Green Magic
 76024	Green Strength
+76025	Bravery Cape (Infinite)
+76026	Bravery Cape+ (Infinite)
 80001	Money Pouch
 80002	Blank Paper
 80003	Silver Bar (50,000 Yang)

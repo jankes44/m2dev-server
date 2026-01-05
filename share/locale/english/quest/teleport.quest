@@ -1,11 +1,6 @@
 quest teleport begin
 	state start begin	
-		when login begin
-			cmdchat("Teleport index"..q.getcurrentquestindex())
-		end
-		
 		when info or button begin
-			cmdchat("Teleport GetInfo")
 			local i = tonumber(input())
 			
 			if type(i) ~= "number" then 
