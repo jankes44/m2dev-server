@@ -1,0 +1,9 @@
+quest test_idle begin
+    state start begin
+        when 20016.chat."TEST IDLE" begin
+            syschat("Before calling pc.start_idle_hunting")
+            pc.start_idle_hunting(101)
+            syschat("After calling pc.start_idle_hunting")
+        end
+    end
+end

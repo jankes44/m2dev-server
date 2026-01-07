@@ -1,0 +1,114 @@
+quest idle_hunting begin
+    state start begin
+        when 20016.chat."Idle Hunting" begin
+            say_title("Idle Hunting System")
+            say("Hunt monsters while you're offline!")
+            say("Gain experience and items automatically.")
+            say("")
+            
+            local time_left = pc.get_idle_hunting_time_left()
+            local hours_left = math.floor(time_left / 3600)
+            local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
+            
+            say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
+            say("")
+            
+            -- Get state: 0=none/idle, 1=pending logout, 2=ready to claim
+            local hunt_state = pc.get_idle_hunting_state()
+            
+            if hunt_state == 2 then
+                -- Player has unclaimed rewards
+                say_title("Hunt Complete!")
+                say("Your idle hunting session is complete.")
+                say("You have rewards waiting to be claimed!")
+                say("")
+                local s = select("Claim Rewards", "Cancel")
+                if s == 1 then
+                    pc.claim_idle_hunting_rewards()
+                end
+                return
+            elseif hunt_state == 1 then
+                -- Hunt is pending - waiting for logout
+                say_title("Hunt Configured")
+                say("You've configured an idle hunt.")
+                say("Log out to start hunting!")
+                say("")
+                local s = select("Cancel Hunt", "Back")
+                if s == 1 then
+                    pc.stop_idle_hunting()
+                    say_title("Cancelled")
+                    say("Idle hunt cancelled.")
+                end
+                return
+            end
+            
+            -- hunt_state == 0 - no active hunt, show menu
+            local s = select("Start Hunting", "Information", "Cancel")
+            
+            if s == 1 then
+                say_title("Select Hunting Target")
+                say("Choose monsters near your level:")
+                say("")
+                
+                local level = pc.get_level()
+                
+                if level < 10 then
+                    say("You must be at least level 10 to use idle hunting.")
+                    return
+                end
+                
+                local mob_choice = select("Wild Dogs (Lv 5)", "Wolves (Lv 9)", "Bears (Lv 15)", "Tigers (Lv 25)", "Cancel")
+                
+                local mob_vnum = 0
+                local mob_name = ""
+                
+                if mob_choice == 1 then
+                    mob_vnum = 101
+                    mob_name = "Wild Dogs"
+                elseif mob_choice == 2 then
+                    mob_vnum = 102
+                    mob_name = "Wolves"
+                elseif mob_choice == 3 then
+                    mob_vnum = 110
+                    mob_name = "Bears"
+                elseif mob_choice == 4 then
+                    mob_vnum = 114
+                    mob_name = "Tigers"
+                else
+                    return
+                end
+                
+                say_title("Confirm Idle Hunting")
+                say("Target: "..mob_name)
+                say("")
+                say("Once confirmed, log off to start hunting.")
+                say("Log back in later to claim rewards!")
+                say("")
+                
+                local confirm = select("Confirm", "Cancel")
+                
+                if confirm == 1 then
+                    pc.start_idle_hunting(mob_vnum)
+                    -- No need to say anything - StartIdleHunting() sends message
+                end
+                
+            elseif s == 2 then
+                say_title("Idle Hunting Information")
+                say("")
+                say("Features:")
+                say("- Hunt while offline")
+                say("- Gain 30 percent normal experience")
+                say("- Collect 50 percent normal yang")
+                say("")
+                say("Limits:")
+                say("- Maximum 8 hours per day")
+                say("- Best efficiency near your level")
+                say("")
+                say("How it works:")
+                say("1. Select a monster to hunt")
+                say("2. Log off to start hunting")
+                say("3. Log in to claim rewards")
+            end
+        end
+    end
+end
