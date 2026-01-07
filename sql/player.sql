@@ -1380,6 +1380,7 @@ CREATE TABLE IF NOT EXISTS `idle_hunting` (
   `pid` int(10) unsigned NOT NULL,
   `mob_vnum` int(10) unsigned NOT NULL DEFAULT 0,
   `start_time` int(10) unsigned NOT NULL DEFAULT 0,
+  `end_time` int(10) unsigned NOT NULL DEFAULT 0,
   `last_claim_time` int(10) unsigned NOT NULL DEFAULT 0,
   `total_time_today` int(10) unsigned NOT NULL DEFAULT 0,
   `last_reset_date` date NOT NULL DEFAULT '2000-01-01',

@@ -6,21 +6,31 @@ quest idle_hunting begin
             say("Gain experience and items automatically.")
             say("")
             
-            local time_left = pc.get_idle_hunting_time_left()
-            local hours_left = math.floor(time_left / 3600)
-            local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
-            
-            say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
-            say("")
-            
             -- Get state: 0=none/idle, 1=pending logout, 2=ready to claim
             local hunt_state = pc.get_idle_hunting_state()
             
             if hunt_state == 2 then
-                -- Player has unclaimed rewards
+                -- Calculate time that will be consumed by this claim
+                local hunt_duration = pc.get_idle_hunting_duration()
+                local time_remaining = pc.get_idle_hunting_time_left()
+                local time_after_claim = time_remaining - hunt_duration
+                
+                if time_after_claim < 0 then
+                    time_after_claim = 0
+                end
+                
+                local hrs_after = math.floor(time_after_claim / 3600)
+                local mins_after = math.floor((time_after_claim - (hrs_after * 3600)) / 60)
+                
+                local hunt_hrs = math.floor(hunt_duration / 3600)
+                local hunt_mins = math.floor((hunt_duration - (hunt_hrs * 3600)) / 60)
+                
                 say_title("Hunt Complete!")
                 say("Your idle hunting session is complete.")
                 say("You have rewards waiting to be claimed!")
+                say("")
+                say_reward("Hunt duration: "..hunt_hrs.."h "..hunt_mins.."m")
+                say_reward("Daily time remaining: "..hrs_after.."h "..mins_after.."m")
                 say("")
                 local s = select("Claim Rewards", "Cancel")
                 if s == 1 then
@@ -29,9 +39,15 @@ quest idle_hunting begin
                 return
             elseif hunt_state == 1 then
                 -- Hunt is pending - waiting for logout
+                local time_left = pc.get_idle_hunting_time_left()
+                local hours_left = math.floor(time_left / 3600)
+                local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
+                
                 say_title("Hunt Configured")
                 say("You've configured an idle hunt.")
                 say("Log out to start hunting!")
+                say("")
+                say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
                 say("")
                 local s = select("Cancel Hunt", "Back")
                 if s == 1 then
@@ -42,7 +58,14 @@ quest idle_hunting begin
                 return
             end
             
-            -- hunt_state == 0 - no active hunt, show menu
+            -- hunt_state == 0 - no active hunt, show current time remaining
+            local time_left = pc.get_idle_hunting_time_left()
+            local hours_left = math.floor(time_left / 3600)
+            local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
+            
+            say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
+            say("")
+            
             local s = select("Start Hunting", "Information", "Cancel")
             
             if s == 1 then
@@ -52,28 +75,26 @@ quest idle_hunting begin
                 
                 local level = pc.get_level()
                 
-                if level < 10 then
-                    say("You must be at least level 10 to use idle hunting.")
-                    return
-                end
-                
-                local mob_choice = select("Wild Dogs (Lv 5)", "Wolves (Lv 9)", "Bears (Lv 15)", "Tigers (Lv 25)", "Cancel")
+                local mob_choice = select("Wild Dogs (Lv 1)", "Alpha Wolves (Lv 5)", "Hungry Bears (Lv 12)", "Hungry Tigers (Lv 18)", "Hungry White Tigers (Lv 25)", "Cancel")
                 
                 local mob_vnum = 0
                 local mob_name = ""
                 
                 if mob_choice == 1 then
-                    mob_vnum = 101
-                    mob_name = "Wild Dogs"
+                    mob_vnum = 171
+                    mob_name = "Hungry Stray Dogs"
                 elseif mob_choice == 2 then
-                    mob_vnum = 102
-                    mob_name = "Wolves"
+                    mob_vnum = 173
+                    mob_name = "Alpha Wolves"
                 elseif mob_choice == 3 then
-                    mob_vnum = 110
-                    mob_name = "Bears"
+                    mob_vnum = 180
+                    mob_name = "Hungry Bears"
                 elseif mob_choice == 4 then
-                    mob_vnum = 114
-                    mob_name = "Tigers"
+                    mob_vnum = 184
+                    mob_name = "Hungry Tigers"
+                elseif mob_choice == 5 then
+                    mob_vnum = 185
+                    mob_name = "Hungry White Tigers"
                 else
                     return
                 end
