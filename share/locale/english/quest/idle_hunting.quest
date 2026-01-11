@@ -6,11 +6,12 @@ quest idle_hunting begin
             say("Gain experience and items automatically.")
             say("")
             
-            -- Get state: 0=none/idle, 1=pending logout, 2=ready to claim
+            -- Get state: 0=pending (configured), 1=hunting (offline), 2=ready to claim
             local hunt_state = pc.get_idle_hunting_state()
+            local group_id = pc.get_idle_hunting_group_id()
             
             if hunt_state == 2 then
-                -- Calculate time that will be consumed by this claim
+                -- Ready to claim rewards
                 local hunt_duration = pc.get_idle_hunting_duration()
                 local time_remaining = pc.get_idle_hunting_time_left()
                 local time_after_claim = time_remaining - hunt_duration
@@ -38,7 +39,13 @@ quest idle_hunting begin
                 end
                 return
             elseif hunt_state == 1 then
-                -- Hunt is pending - waiting for logout
+                -- Currently hunting (offline)
+                say_title("Hunt in Progress")
+                say("Your character is currently hunting offline.")
+                say("Log back in later to claim your rewards!")
+                return
+            elseif hunt_state == 0 and group_id > 0 then
+                -- Hunt configured, pending logout
                 local time_left = pc.get_idle_hunting_time_left()
                 local hours_left = math.floor(time_left / 3600)
                 local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
@@ -58,7 +65,7 @@ quest idle_hunting begin
                 return
             end
             
-            -- hunt_state == 0 - no active hunt, show current time remaining
+            -- No active hunt (hunt_state == 0 and group_id == 0)
             local time_left = pc.get_idle_hunting_time_left()
             local hours_left = math.floor(time_left / 3600)
             local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
@@ -69,38 +76,43 @@ quest idle_hunting begin
             local s = select("Start Hunting", "Information", "Cancel")
             
             if s == 1 then
-                say_title("Select Hunting Target")
-                say("Choose monsters near your level:")
+                say_title("Select Hunting Group")
+                say("Choose a hunting group:")
                 say("")
                 
-                local level = pc.get_level()
+                -- Dynamically fetch available groups
+                local available_groups = pc.get_available_idle_hunting_groups()
                 
-                local mob_choice = select("Wild Dogs (Lv 1)", "Alpha Wolves (Lv 5)", "Hungry Bears (Lv 12)", "Hungry Tigers (Lv 18)", "Hungry White Tigers (Lv 25)", "Cancel")
-                
-                local mob_vnum = 0
-                local mob_name = ""
-                
-                if mob_choice == 1 then
-                    mob_vnum = 171
-                    mob_name = "Hungry Stray Dogs"
-                elseif mob_choice == 2 then
-                    mob_vnum = 173
-                    mob_name = "Alpha Wolves"
-                elseif mob_choice == 3 then
-                    mob_vnum = 180
-                    mob_name = "Hungry Bears"
-                elseif mob_choice == 4 then
-                    mob_vnum = 184
-                    mob_name = "Hungry Tigers"
-                elseif mob_choice == 5 then
-                    mob_vnum = 185
-                    mob_name = "Hungry White Tigers"
-                else
+                if table.getn(available_groups) == 0 then
+                    say("No hunting groups available at your level.")
                     return
                 end
                 
+                -- Build select options dynamically
+                local select_options = {}
+                for i, group in ipairs(available_groups) do
+                    local level_text = "(Lv "..group.min_level.."+)"
+                    if group.premium_only then
+                        level_text = level_text.." Premium"
+                    end
+                    table.insert(select_options, group.display_name.." "..level_text)
+                end
+                table.insert(select_options, "Cancel")
+                
+                local group_choice = select(unpack(select_options))
+                
+                -- Check if cancelled
+                if group_choice > table.getn(available_groups) then
+                    return
+                end
+                
+                -- Get selected group
+                local selected_group = available_groups[group_choice]
+                local selected_group_id = selected_group.id
+                local group_name = selected_group.display_name
+                
                 say_title("Confirm Idle Hunting")
-                say("Target: "..mob_name)
+                say("Target: "..group_name)
                 say("")
                 say("Once confirmed, log off to start hunting.")
                 say("Log back in later to claim rewards!")
@@ -109,8 +121,7 @@ quest idle_hunting begin
                 local confirm = select("Confirm", "Cancel")
                 
                 if confirm == 1 then
-                    pc.start_idle_hunting(mob_vnum)
-                    -- No need to say anything - StartIdleHunting() sends message
+                    pc.start_idle_hunting(selected_group_id)
                 end
                 
             elseif s == 2 then
@@ -118,15 +129,15 @@ quest idle_hunting begin
                 say("")
                 say("Features:")
                 say("- Hunt while offline")
-                say("- Gain 30 percent normal experience")
-                say("- Collect 50 percent normal yang")
+                say("- Hunt multiple mob types in a group")
+                say("- Earn group bonuses and custom drops")
                 say("")
                 say("Limits:")
                 say("- Maximum 8 hours per day")
-                say("- Best efficiency near your level")
+                say("- Level and premium requirements")
                 say("")
                 say("How it works:")
-                say("1. Select a monster to hunt")
+                say("1. Select a hunting group")
                 say("2. Log off to start hunting")
                 say("3. Log in to claim rewards")
             end
