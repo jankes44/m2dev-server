@@ -2295,3 +2295,81 @@
 
 "[Friends] %s has already sent you a friend request.";
 "[Znajomi] Gracz %s wysłał Ci już zaproszenie.";
+
+"You cannot delete an item while trading.";
+"Nie możesz zniszczyć przedmiotu podczas handlu.";
+
+"You cannot delete an item that is currently in use.";
+"Nie możesz zniszczyć przedmiotu, który jest obecnie w użyciu.";
+
+"Item has been destroyed.";
+"Przedmiot został zniszczony.";
+
+"IDLE_HUNT_INVALID_GROUP";
+"Nieprawidłowy wybór grupy łowieckiej!";
+
+"IDLE_HUNT_LEVEL_TOO_LOW";
+"Potrzebujesz poziomu %d, aby polować na tę grupę!";
+
+"IDLE_HUNT_PREMIUM_REQUIRED";
+"Ta grupa łowiecka wymaga statusu premium!";
+
+"IDLE_HUNT_ALREADY_CONFIGURED";
+"Już skonfigurowałeś Łowy. Wyloguj się, aby rozpocząć, lub najpierw je anuluj!";
+
+"IDLE_HUNT_ALREADY_ACTIVE";
+"Łowy Offline są już w toku!";
+
+"IDLE_HUNT_CLAIM_FIRST";
+"Masz nieodebrane nagrody! Odbierz je najpierw przed rozpoczęciem nowych łowów.";
+
+"IDLE_HUNT_CONFIGURED";
+"Łowy skonfigurowane dla '%s'. Wyloguj się, aby rozpocząć polowanie!";
+
+"IDLE_HUNT_CANCELLED";
+"Łowy Offline zostały anulowane.";
+
+"IDLE_HUNT_DAILY_LIMIT_REACHED";
+"Osiągnąłeś dzienny limit %d godzin!";
+
+"IDLE_HUNT_DAILY_LIMIT_PARTIAL";
+"Osiągnięto dzienny limit %d godzin! Zbieranie częściowych nagród.";
+
+"IDLE_HUNT_YANG_EARNED";
+"Zdobyto %u yang z Łowów Offline!";
+
+"IDLE_HUNT_ITEM_DROP";
+"+ %s x%d";
+
+"IDLE_HUNT_COMPLETE_LOGIN";
+"Twoje Łowy Offline są zakończone! Porozmawiaj z NPC, aby odebrać nagrody.";
+
+"IDLE_HUNT_UNCLAIMED_REWARDS";
+"Masz nieodebrane nagrody z Łowów Offline! Porozmawiaj z NPC, aby je odebrać.";
+
+"IDLE_HUNT_SYSTEM_ERROR";
+"Błąd systemu - spróbuj ponownie.";
+
+"IDLE_HUNT_RESULTS_HEADER";
+"Wyniki Łowów Offline";
+
+"IDLE_HUNT_RESULTS_GROUP";
+"Grupa: %s";
+
+"IDLE_HUNT_RESULTS_TIME";
+"Czas: %d minut";
+
+"IDLE_HUNT_RESULTS_KILLS";
+"Zabójstwa: %d";
+
+"IDLE_HUNT_RESULTS_EXP";
+"Doświadczenie: %lld";
+
+"IDLE_HUNT_DAILY_REMAINING";
+"Pozostały dzienny czas: %dg %dm";
+
+"IDLE_HUNT_NO_REWARDS";
+"Brak nagród z Łowów Offline do odebrania!";
+
+"IDLE_HUNT_DAILY_LIMIT_HIT";
+"Osiągnąłeś %d-godzinny dzienny limit Łowów Offline!";

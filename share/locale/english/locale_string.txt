@@ -2304,3 +2304,73 @@
 
 "Item has been destroyed.";
 "Item has been destroyed.";
+
+"IDLE_HUNT_INVALID_GROUP";
+"Invalid hunting group selection!";
+
+"IDLE_HUNT_LEVEL_TOO_LOW";
+"You need level %d to hunt this group!";
+
+"IDLE_HUNT_PREMIUM_REQUIRED";
+"This hunting group requires premium status!";
+
+"IDLE_HUNT_ALREADY_CONFIGURED";
+"You already configured a hunt. Log out to start, or cancel it first!";
+
+"IDLE_HUNT_ALREADY_ACTIVE";
+"Idle hunting is already in progress!";
+
+"IDLE_HUNT_CLAIM_FIRST";
+"You have unclaimed rewards! Claim them first before starting a new hunt.";
+
+"IDLE_HUNT_CONFIGURED";
+"Idle hunt configured for '%s'. Log out to start hunting!";
+
+"IDLE_HUNT_CANCELLED";
+"Idle hunting has been cancelled.";
+
+"IDLE_HUNT_DAILY_LIMIT_REACHED";
+"You've reached the %d-hour daily limit!";
+
+"IDLE_HUNT_DAILY_LIMIT_PARTIAL";
+"Daily %d-hour limit reached! Collecting partial rewards.";
+
+"IDLE_HUNT_YANG_EARNED";
+"Earned %u yang from idle hunting!";
+
+"IDLE_HUNT_ITEM_DROP";
+"+ %s x%d";
+
+"IDLE_HUNT_COMPLETE_LOGIN";
+"Your idle hunt is complete! Talk to the NPC to claim rewards.";
+
+"IDLE_HUNT_UNCLAIMED_REWARDS";
+"You have unclaimed idle hunt rewards! Talk to the NPC to claim them.";
+
+"IDLE_HUNT_SYSTEM_ERROR";
+"System error - please try again.";
+
+"IDLE_HUNT_RESULTS_HEADER";
+"Idle Hunt Results";
+
+"IDLE_HUNT_RESULTS_GROUP";
+"Group: %s";
+
+"IDLE_HUNT_RESULTS_TIME";
+"Time: %d minutes";
+
+"IDLE_HUNT_RESULTS_KILLS";
+"Kills: %d";
+
+"IDLE_HUNT_RESULTS_EXP";
+"Experience: %lld";
+
+"IDLE_HUNT_DAILY_REMAINING";
+"Daily time remaining: %dh %dm";
+
+"IDLE_HUNT_NO_REWARDS";
+"No idle hunt rewards to claim!";
+
+"IDLE_HUNT_DAILY_LIMIT_HIT";
+"You've reached the %d-hour daily limit for idle hunting!";
+

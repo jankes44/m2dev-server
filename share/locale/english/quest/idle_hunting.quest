@@ -1,17 +1,15 @@
 quest idle_hunting begin
     state start begin
-        when 20016.chat."Idle Hunting" begin
-            say_title("Idle Hunting System")
-            say("Hunt monsters while you're offline!")
-            say("Gain experience and items automatically.")
+        when 20016.chat.gameforge.idle_hunting._01_npcChat begin
+            say_title(gameforge.idle_hunting._10_sayTitle)
+            say(gameforge.idle_hunting._20_say)
+            say(gameforge.idle_hunting._30_say)
             say("")
             
-            -- Get state: 0=pending (configured), 1=hunting (offline), 2=ready to claim
             local hunt_state = pc.get_idle_hunting_state()
             local group_id = pc.get_idle_hunting_group_id()
             
             if hunt_state == 2 then
-                -- Ready to claim rewards
                 local hunt_duration = pc.get_idle_hunting_duration()
                 local time_remaining = pc.get_idle_hunting_time_left()
                 local time_after_claim = time_remaining - hunt_duration
@@ -26,69 +24,64 @@ quest idle_hunting begin
                 local hunt_hrs = math.floor(hunt_duration / 3600)
                 local hunt_mins = math.floor((hunt_duration - (hunt_hrs * 3600)) / 60)
                 
-                say_title("Hunt Complete!")
-                say("Your idle hunting session is complete.")
-                say("You have rewards waiting to be claimed!")
+                say_title(gameforge.idle_hunting._40_sayTitle)
+                say(gameforge.idle_hunting._50_say)
+                say(gameforge.idle_hunting._60_say)
                 say("")
-                say_reward("Hunt duration: "..hunt_hrs.."h "..hunt_mins.."m")
-                say_reward("Daily time remaining: "..hrs_after.."h "..mins_after.."m")
+                say_reward(string.format(gameforge.idle_hunting._70_sayReward, hunt_hrs, hunt_mins))
+                say_reward(string.format(gameforge.idle_hunting._80_sayReward, hrs_after, mins_after))
                 say("")
-                local s = select("Claim Rewards", "Cancel")
+                local s = select(gameforge.idle_hunting._90_select, gameforge.idle_hunting._100_select)
                 if s == 1 then
                     pc.claim_idle_hunting_rewards()
                 end
                 return
             elseif hunt_state == 1 then
-                -- Currently hunting (offline)
-                say_title("Hunt in Progress")
-                say("Your character is currently hunting offline.")
-                say("Log back in later to claim your rewards!")
+                say_title(gameforge.idle_hunting._110_sayTitle)
+                say(gameforge.idle_hunting._120_say)
+                say(gameforge.idle_hunting._130_say)
                 return
             elseif hunt_state == 0 and group_id > 0 then
-                -- Hunt configured, pending logout
                 local time_left = pc.get_idle_hunting_time_left()
                 local hours_left = math.floor(time_left / 3600)
                 local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
                 
-                say_title("Hunt Configured")
-                say("You've configured an idle hunt.")
-                say("Log out to start hunting!")
+                say_title(gameforge.idle_hunting._140_sayTitle)
+                say(gameforge.idle_hunting._150_say)
+                say(gameforge.idle_hunting._160_say)
                 say("")
-                say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
+                say_reward(string.format(gameforge.idle_hunting._80_sayReward, hours_left, mins_left))
                 say("")
-                local s = select("Cancel Hunt", "Back")
+                local s = select(gameforge.idle_hunting._170_select, gameforge.idle_hunting._180_select)
                 if s == 1 then
                     pc.stop_idle_hunting()
-                    say_title("Cancelled")
-                    say("Idle hunt cancelled.")
+                    say_title(gameforge.idle_hunting._190_sayTitle)
+                    say(gameforge.idle_hunting._200_say)
                 end
                 return
             end
             
-            -- No active hunt (hunt_state == 0 and group_id == 0)
             local time_left = pc.get_idle_hunting_time_left()
             local hours_left = math.floor(time_left / 3600)
             local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
             
-            say_reward("Daily time remaining: "..hours_left.."h "..mins_left.."m")
+            say_reward(string.format(gameforge.idle_hunting._80_sayReward, hours_left, mins_left))
             say("")
             
-            local s = select("Start Hunting", "Information", "Cancel")
+            local s = select(gameforge.idle_hunting._210_select, gameforge.idle_hunting._220_select, gameforge.idle_hunting._100_select)
             
             if s == 1 then
-                say_title("Select Hunting Group")
-                say("Choose a hunting group:")
+                say_title(gameforge.idle_hunting._230_sayTitle)
+                say(gameforge.idle_hunting._240_say)
                 say("")
                 
-                -- Dynamically fetch available groups
                 local available_groups = pc.get_available_idle_hunting_groups()
                 
                 if table.getn(available_groups) == 0 then
-                    say("No hunting groups available at your level.")
+                    say(gameforge.idle_hunting._250_say)
                     return
                 end
                 
-                -- Build select options dynamically
                 local select_options = {}
                 for i, group in ipairs(available_groups) do
                     local level_text = "(Lv "..group.min_level.."+)"
@@ -97,49 +90,47 @@ quest idle_hunting begin
                     end
                     table.insert(select_options, group.display_name.." "..level_text)
                 end
-                table.insert(select_options, "Cancel")
+                table.insert(select_options, gameforge.idle_hunting._100_select)
                 
                 local group_choice = select(unpack(select_options))
                 
-                -- Check if cancelled
                 if group_choice > table.getn(available_groups) then
                     return
                 end
                 
-                -- Get selected group
                 local selected_group = available_groups[group_choice]
                 local selected_group_id = selected_group.id
                 local group_name = selected_group.display_name
                 
-                say_title("Confirm Idle Hunting")
-                say("Target: "..group_name)
+                say_title(gameforge.idle_hunting._260_sayTitle)
+                say(string.format(gameforge.idle_hunting._270_say, group_name))
                 say("")
-                say("Once confirmed, log off to start hunting.")
-                say("Log back in later to claim rewards!")
+                say(gameforge.idle_hunting._280_say)
+                say(gameforge.idle_hunting._290_say)
                 say("")
                 
-                local confirm = select("Confirm", "Cancel")
+                local confirm = select(gameforge.idle_hunting._300_select, gameforge.idle_hunting._100_select)
                 
                 if confirm == 1 then
                     pc.start_idle_hunting(selected_group_id)
                 end
                 
             elseif s == 2 then
-                say_title("Idle Hunting Information")
+                say_title(gameforge.idle_hunting._310_sayTitle)
                 say("")
-                say("Features:")
-                say("- Hunt while offline")
-                say("- Hunt multiple mob types in a group")
-                say("- Earn group bonuses and custom drops")
+                say(gameforge.idle_hunting._320_say)
+                say(gameforge.idle_hunting._330_say)
+                say(gameforge.idle_hunting._340_say)
+                say(gameforge.idle_hunting._350_say)
                 say("")
-                say("Limits:")
-                say("- Maximum 8 hours per day")
-                say("- Level and premium requirements")
+                say(gameforge.idle_hunting._360_say)
+                say(gameforge.idle_hunting._370_say)
+                say(gameforge.idle_hunting._380_say)
                 say("")
-                say("How it works:")
-                say("1. Select a hunting group")
-                say("2. Log off to start hunting")
-                say("3. Log in to claim rewards")
+                say(gameforge.idle_hunting._390_say)
+                say(gameforge.idle_hunting._400_say)
+                say(gameforge.idle_hunting._410_say)
+                say(gameforge.idle_hunting._420_say)
             end
         end
     end
