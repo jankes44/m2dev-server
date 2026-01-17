@@ -583,3 +583,8 @@ q.end_other_pc_block
 get_special_item_group
 say_npc
 pc.change_name
+pc.disconnect_character
+pc.get_idle_hunting_time_left
+pc.is_idle_hunting_active
+pc.start_idle_hunting
+pc.stop_idle_hunting

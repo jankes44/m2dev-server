@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "last_updated": "2026-01-10",
+  "groups": [
+    {
+      "id": 1,
+      "name": "M1_Wild_Dogs_Wolves_Boars",
+      "display_name": "Map1 Wild Dogs, Wolves & Boars",
+      "description": "Hunt wild dogs, wolves and boars in the forests of Map1",
+      "min_level": 1,
+      "premium_only": false,
+      "exp_multiplier": 1.0,
+      "yang_multiplier": 1.0,
+      "mobs": [
+        { "vnum": 101, "weight": 15, "name": "Wild Dog" },
+        { "vnum": 102, "weight": 20, "name": "Wolf" },
+        { "vnum": 103, "weight": 25, "name": "Wild Boar" }
+      ],
+      "drops": [
+        { "item_vnum": 30027, "chance": 300, "min": 1, "max": 2, "name": "Wolf Fur" },
+        { "item_vnum": 30070, "chance": 300, "min": 1, "max": 1, "name": "Wolf Fur+" },
+        { "item_vnum": 30028, "chance": 300, "min": 1, "max": 1, "name": "Wolf Claw" },
+        { "item_vnum": 30069, "chance": 500, "min": 1, "max": 1, "name": "Wolf Claw+" },
+        { "item_vnum": 30004, "chance": 300, "min": 1, "max": 2, "name": "Wild Boar Tooth" },
+        { "item_vnum": 30003, "chance": 200, "min": 1, "max": 1, "name": "Pig Nose" },
+        { "item_vnum": 27001, "chance": 1000, "min": 1, "max": 5, "name": "Red Potion(S)" },
+        { "item_vnum": 27004, "chance": 800, "min": 1, "max": 3, "name": "Blue Potion(S)" }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "M1_Bears_Tigers",
+      "display_name": "Map1 Bears & Tigers",
+      "description": "Hunt dangerous bears and tigers in Map1",
+      "min_level": 10,
+      "premium_only": false,
+      "exp_multiplier": 1.2,
+      "yang_multiplier": 1.1,
+      "mobs": [
+        { "vnum": 111, "weight": 25, "name": "Grizzly Bear" },
+        { "vnum": 112, "weight": 25, "name": "Black Bear" },
+        { "vnum": 113, "weight": 25, "name": "Brown Bear" },
+        { "vnum": 114, "weight": 25, "name": "Tiger" }
+      ],
+      "drops": [
+        { "item_vnum": 30010, "chance": 250, "min": 1, "max": 2, "name": "Bear Gall" },
+        { "item_vnum": 30071, "chance": 200, "min": 1, "max": 1, "name": "Bear Gall+" },
+        { "item_vnum": 30037, "chance": 200, "min": 1, "max": 1, "name": "Tiger Claw" },
+        { "item_vnum": 30038, "chance": 400, "min": 1, "max": 2, "name": "Tiger Hide" },
+        { "item_vnum": 30042, "chance": 400, "min": 1, "max": 1, "name": "Tiger Fang" },
+        { "item_vnum": 27001, "chance": 1000, "min": 1, "max": 5, "name": "Red Potion(S)" },
+        { "item_vnum": 27004, "chance": 800, "min": 1, "max": 3, "name": "Blue Potion(S)" }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "M1_White_Oath_Basic",
+      "display_name": "Map1 White Oath (Basic)",
+      "description": "Hunt White Oath soldiers, archers, and generals in Map1",
+      "min_level": 18,
+      "premium_only": false,
+      "exp_multiplier": 1.2,
+      "yang_multiplier": 1.1,
+      "mobs": [
+        { "vnum": 301, "weight": 30, "name": "White Oath Soldier" },
+        { "vnum": 302, "weight": 30, "name": "White Oath Archer" },
+        { "vnum": 303, "weight": 20, "name": "White Oath General" },
+        { "vnum": 304, "weight": 20, "name": "White Oath Commander" }
+      ],
+      "drops": [
+        { "item_vnum": 30034, "chance": 300, "min": 1, "max": 2, "name": "White Hairband" },
+        { "item_vnum": 30073, "chance": 250, "min": 1, "max": 1, "name": "White Hairband+" },
+        { "item_vnum": 30031, "chance": 300, "min": 1, "max": 1, "name": "Ornament" },
+        { "item_vnum": 30011, "chance": 100, "min": 1, "max": 1, "name": "Ball" },
+        { "item_vnum": 27001, "chance": 800, "min": 1, "max": 3, "name": "Red Potion(S)" }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "M1_White_Oath_Advanced",
+      "display_name": "Map1 White Oath (Advanced)",
+      "description": "Hunt stronger White Oath, Craven units, and female warriors in Map1",
+      "min_level": 23,
+      "premium_only": false,
+      "exp_multiplier": 1.5,
+      "yang_multiplier": 1.3,
+      "mobs": [
+        { "vnum": 351, "weight": 15, "name": "Craven White Oath Sold." },
+        { "vnum": 352, "weight": 15, "name": "Craven White Oath Archer" },
+        { "vnum": 353, "weight": 12, "name": "Craven White Oath Gen." },
+        { "vnum": 354, "weight": 12, "name": "Craven Wh. Oath Com." },
+        { "vnum": 391, "weight": 12, "name": "Mi-Jung" },
+        { "vnum": 392, "weight": 12, "name": "Eun-Jung" },
+        { "vnum": 393, "weight": 12, "name": "Se-Rang" },
+        { "vnum": 394, "weight": 10, "name": "Jin-Hee" }
+      ],
+      "drops": [
+        { "item_vnum": 30034, "chance": 350, "min": 1, "max": 2, "name": "White Hairband" },
+        { "item_vnum": 30073, "chance": 300, "min": 1, "max": 2, "name": "White Hairband+" },
+        { "item_vnum": 30031, "chance": 300, "min": 1, "max": 1, "name": "Ornament" },
+        { "item_vnum": 30011, "chance": 250, "min": 1, "max": 1, "name": "Ball" },
+        { "item_vnum": 30018, "chance": 250, "min": 1, "max": 1, "name": "Red Hairband" },
+        { "item_vnum": 30017, "chance": 200, "min": 1, "max": 1, "name": "Ornamental Hairpin" },
+        { "item_vnum": 30035, "chance": 200, "min": 1, "max": 1, "name": "Face Cream" },
+        { "item_vnum": 27001, "chance": 1000, "min": 1, "max": 4, "name": "Red Potion(S)" }
+      ]
+    }
+  ]
+}

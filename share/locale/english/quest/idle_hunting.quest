@@ -1,0 +1,137 @@
+quest idle_hunting begin
+    state start begin
+        when 20016.chat.gameforge.idle_hunting._01_npcChat begin
+            say_title(gameforge.idle_hunting._10_sayTitle)
+            say(gameforge.idle_hunting._20_say)
+            say(gameforge.idle_hunting._30_say)
+            say("")
+            
+            local hunt_state = pc.get_idle_hunting_state()
+            local group_id = pc.get_idle_hunting_group_id()
+            
+            if hunt_state == 2 then
+                local hunt_duration = pc.get_idle_hunting_duration()
+                local time_remaining = pc.get_idle_hunting_time_left()
+                local time_after_claim = time_remaining - hunt_duration
+                
+                if time_after_claim < 0 then
+                    time_after_claim = 0
+                end
+                
+                local hrs_after = math.floor(time_after_claim / 3600)
+                local mins_after = math.floor((time_after_claim - (hrs_after * 3600)) / 60)
+                
+                local hunt_hrs = math.floor(hunt_duration / 3600)
+                local hunt_mins = math.floor((hunt_duration - (hunt_hrs * 3600)) / 60)
+                
+                say_title(gameforge.idle_hunting._40_sayTitle)
+                say(gameforge.idle_hunting._50_say)
+                say(gameforge.idle_hunting._60_say)
+                say("")
+                say_reward(string.format(gameforge.idle_hunting._70_sayReward, hunt_hrs, hunt_mins))
+                say_reward(string.format(gameforge.idle_hunting._80_sayReward, hrs_after, mins_after))
+                say("")
+                local s = select(gameforge.idle_hunting._90_select, gameforge.idle_hunting._100_select)
+                if s == 1 then
+                    pc.claim_idle_hunting_rewards()
+                end
+                return
+            elseif hunt_state == 1 then
+                say_title(gameforge.idle_hunting._110_sayTitle)
+                say(gameforge.idle_hunting._120_say)
+                say(gameforge.idle_hunting._130_say)
+                return
+            elseif hunt_state == 0 and group_id > 0 then
+                local time_left = pc.get_idle_hunting_time_left()
+                local hours_left = math.floor(time_left / 3600)
+                local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
+                
+                say_title(gameforge.idle_hunting._140_sayTitle)
+                say(gameforge.idle_hunting._150_say)
+                say(gameforge.idle_hunting._160_say)
+                say("")
+                say_reward(string.format(gameforge.idle_hunting._80_sayReward, hours_left, mins_left))
+                say("")
+                local s = select(gameforge.idle_hunting._170_select, gameforge.idle_hunting._180_select)
+                if s == 1 then
+                    pc.stop_idle_hunting()
+                    say_title(gameforge.idle_hunting._190_sayTitle)
+                    say(gameforge.idle_hunting._200_say)
+                end
+                return
+            end
+            
+            local time_left = pc.get_idle_hunting_time_left()
+            local hours_left = math.floor(time_left / 3600)
+            local mins_left = math.floor((time_left - (hours_left * 3600)) / 60)
+            
+            say_reward(string.format(gameforge.idle_hunting._80_sayReward, hours_left, mins_left))
+            say("")
+            
+            local s = select(gameforge.idle_hunting._210_select, gameforge.idle_hunting._220_select, gameforge.idle_hunting._100_select)
+            
+            if s == 1 then
+                say_title(gameforge.idle_hunting._230_sayTitle)
+                say(gameforge.idle_hunting._240_say)
+                say("")
+                
+                local available_groups = pc.get_available_idle_hunting_groups()
+                
+                if table.getn(available_groups) == 0 then
+                    say(gameforge.idle_hunting._250_say)
+                    return
+                end
+                
+                local select_options = {}
+                for i, group in ipairs(available_groups) do
+                    local level_text = "(Lv "..group.min_level.."+)"
+                    if group.premium_only then
+                        level_text = level_text.." Premium"
+                    end
+                    table.insert(select_options, group.display_name.." "..level_text)
+                end
+                table.insert(select_options, gameforge.idle_hunting._100_select)
+                
+                local group_choice = select(unpack(select_options))
+                
+                if group_choice > table.getn(available_groups) then
+                    return
+                end
+                
+                local selected_group = available_groups[group_choice]
+                local selected_group_id = selected_group.id
+                local group_name = selected_group.display_name
+                
+                say_title(gameforge.idle_hunting._260_sayTitle)
+                say(string.format(gameforge.idle_hunting._270_say, group_name))
+                say("")
+                say(gameforge.idle_hunting._280_say)
+                say(gameforge.idle_hunting._290_say)
+                say("")
+                
+                local confirm = select(gameforge.idle_hunting._300_select, gameforge.idle_hunting._100_select)
+                
+                if confirm == 1 then
+                    pc.start_idle_hunting(selected_group_id)
+                end
+                
+            elseif s == 2 then
+                say_title(gameforge.idle_hunting._310_sayTitle)
+                say("")
+                say(gameforge.idle_hunting._320_say)
+                say(gameforge.idle_hunting._330_say)
+                say(gameforge.idle_hunting._340_say)
+                say(gameforge.idle_hunting._350_say)
+                say("")
+                say(gameforge.idle_hunting._360_say)
+                say(gameforge.idle_hunting._370_say)
+                say(gameforge.idle_hunting._380_say)
+                say("")
+                say(gameforge.idle_hunting._390_say)
+                say(gameforge.idle_hunting._400_say)
+                say(gameforge.idle_hunting._410_say)
+                say(gameforge.idle_hunting._420_say)
+            end
+        end
+    end
+end
