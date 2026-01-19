@@ -2373,3 +2373,18 @@
 
 "IDLE_HUNT_DAILY_LIMIT_HIT";
 "Osiągnąłeś %d-godzinny dzienny limit Łowów Offline!";
+
+"CHANNEL_CHANGE_BLOCKED_LOCATION";
+"Nie możesz zmienić kanału w tej lokalizacji.";
+
+"CHANNEL_PORT_NOT_AVAILABLE";
+"Ten port nie jest dostępny! (%d)";
+
+"CHANNEL_ALREADY_ON_CHANNEL";
+"Jesteś już na kanale %d!";
+
+"CHANNEL_NOT_AVAILABLE";
+"Kanał %d nie jest dostępny. Dostępne kanały: 1-%d";
+
+"CHANNEL_CHANGING";
+"Proszę czekać. Zmiana kanału...";

@@ -2374,3 +2374,17 @@
 "IDLE_HUNT_DAILY_LIMIT_HIT";
 "You've reached the %d-hour daily limit for idle hunting!";
 
+"CHANNEL_CHANGE_BLOCKED_LOCATION";
+"You can't change channel while you're inside this location.";
+
+"CHANNEL_PORT_NOT_AVAILABLE";
+"This port is not available! (%d)";
+
+"CHANNEL_ALREADY_ON_CHANNEL";
+"You're already on channel %d!";
+
+"CHANNEL_NOT_AVAILABLE";
+"Channel %d is not available. Available channels: 1-%d";
+
+"CHANNEL_CHANGING";
+"Please wait a moment. Changing channel...";
